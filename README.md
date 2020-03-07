@@ -20,3 +20,8 @@ bundle exec cucumber
 ```
 ./exe/game
 ```
+
+## About
+
+The objective of this project is to refactor the initial code.
+Code provided by @lfv89
