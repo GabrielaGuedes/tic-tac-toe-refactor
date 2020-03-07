@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+require_relative '../game.rb'
+
+srand(ENV['SEED'].to_i) if ENV['SEED']
+
+Game::CLI.start
