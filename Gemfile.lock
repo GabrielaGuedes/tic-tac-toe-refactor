@@ -16,6 +16,7 @@ GEM
     backports (3.11.0)
     builder (3.2.3)
     childprocess (3.0.0)
+    coderay (1.1.2)
     contracts (0.16.0)
     cucumber (3.1.0)
       builder (>= 2.1.2)
@@ -37,8 +38,12 @@ GEM
     ffi (1.12.2)
     ffi (1.12.2-x64-mingw32)
     gherkin (5.0.0)
+    method_source (0.9.2)
     multi_json (1.12.2)
     multi_test (0.1.2)
+    pry (0.12.2)
+      coderay (~> 1.1.0)
+      method_source (~> 0.9.0)
     rake (10.5.0)
     rspec (3.7.0)
       rspec-core (~> 3.7.0)
@@ -64,6 +69,7 @@ DEPENDENCIES
   bundler (~> 1.16.a)
   cucumber
   game!
+  pry
   rake (~> 10.0)
   rspec (~> 3.0)
 
