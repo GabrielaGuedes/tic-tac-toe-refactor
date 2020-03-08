@@ -1,11 +1,12 @@
 require_relative './lib/board.rb'
+require_relative './lib/computer_player.rb'
 
 module Game
   class CLI
     class << self
       def start
-        @board = ::Game::Board.new
-        @com = "X" # the computer's marker
+        @board = Game::Board.new
+        @computer_player = Game::ComputerPlayer.new
         @hum = "O" # the user's marker
 
         start_game
@@ -16,10 +17,10 @@ module Game
         @board.print_board
         puts "Enter [0-8]:"
         # loop through until the game was won or tied
-        until game_is_over(@board) || tie(@board)
+        until game_is_over || tie
           get_human_spot
-          if !game_is_over(@board) && !tie(@board)
-            eval_board
+          if !game_is_over && !tie
+            eval_computer_turn
           end
           @board.print_board
         end
@@ -38,55 +39,16 @@ module Game
         end
       end
 
-      def eval_board
-        spot = nil
-        until spot
-          if @board.available_tile?(4)
-            spot = 4
-            @board.fill_tile_with(spot, @com)
-          else
-            spot = get_best_move(@board, @com)
-            if @board.available_tile?(spot)
-              @board.fill_tile_with(spot, @com)
-            else
-              spot = nil
-            end
-          end
-        end
+      def eval_computer_turn
+        spot = @computer_player.spot_to_place_marker(@board)
+        @board.fill_tile_with(spot, Game::ComputerPlayer::MARKER)
       end
 
-      def get_best_move(board, next_player, depth = 0, best_score = {})
-        best_move = nil
-        board.available_tiles.each do |as|          
-          board.fill_tile_with(as.to_i, @com)
-          if game_is_over(board)
-            best_move = as.to_i
-            board.fill_tile_with(as.to_i, as)
-            return best_move
-          else
-            board.fill_tile_with(as.to_i, @hum)
-            if game_is_over(board)
-              best_move = as.to_i
-              board.fill_tile_with(as.to_i, as)
-              return best_move
-            else
-              board.fill_tile_with(as.to_i, as)
-            end
-          end
-        end
-        if best_move
-          return best_move
-        else
-          n = rand(0..board.available_tiles.count)
-          return board.available_tiles[n].to_i
-        end
-      end
-
-      def game_is_over(b)
+      def game_is_over
         @board.valid_sequency_with_equal_markers?
       end
 
-      def tie(b)
+      def tie
         @board.board_full?
       end
     end
