@@ -18,7 +18,7 @@ bundle exec cucumber
 ## Running
 
 ```
-./exe/game
+ruby ./exe/game
 ```
 
 ## About
