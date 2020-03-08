@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require_relative '../game.rb'
+require_relative '../lib/game.rb'
 
 srand(ENV['SEED'].to_i) if ENV['SEED']
 
