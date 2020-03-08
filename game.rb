@@ -7,6 +7,7 @@ module Game
       def start
         @board = Game::Board.new
         @computer_player = Game::ComputerPlayer.new
+        @human_player = Game::HumanPlayer.new
         @hum = "O" # the user's marker
 
         start_game
@@ -28,15 +29,8 @@ module Game
       end
 
       def get_human_spot
-        spot = nil
-        until spot
-          spot = gets.chomp.to_i
-          if @board.available_tile?(spot)
-            @board.fill_tile_with(spot, @hum)
-          else
-            spot = nil
-          end
-        end
+        spot = @human_player.spot_to_place_marker(@board)
+        @board.fill_tile_with(spot, Game::HumanPlayer::MARKER)
       end
 
       def eval_computer_turn

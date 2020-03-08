@@ -1,8 +1,8 @@
+require_relative './human_player.rb'
+
 module Game
   class ComputerPlayer
     MARKER = "X"
-    
-    attr_accessor :board
 
     def spot_to_place_marker(board)
       @board = board
@@ -35,7 +35,7 @@ module Game
     end
 
     def test_filling_prevents_human_to_win?(tile)
-      @board.fill_tile_with(tile, "O")
+      @board.fill_tile_with(tile, Game::HumanPlayer::MARKER)
       game_ends?
     end
 
@@ -48,7 +48,7 @@ module Game
     end
 
     def get_random_spot
-      n = rand(0..board.available_tiles.count)
+      n = rand(0..@board.available_tiles.count)
       @board.available_tiles[n].to_i
     end
 
