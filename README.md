@@ -3,7 +3,7 @@
 ## Config
 
 ```
-git clone git@github.com:lfv89/base-tic-tac-toe.git
+git clone git@github.com:GabrielaGuedes/tic-tac-toe-refactor.git
 cd base-tic-tac-toe
 bundle install
 ```
