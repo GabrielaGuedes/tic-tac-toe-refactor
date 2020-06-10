@@ -3,11 +3,11 @@ require_relative '../lib/board.rb'
 
 RSpec.describe Game::ComputerPlayer do
   let!(:board) { Game::Board.new }
-  subject { described_class.new }
+  subject(:computer_player) { described_class.new }
 
   describe "#spot_to_place_marker" do
     context "when game has just began" do
-      it { expect(subject.spot_to_place_marker(board).to_i).to eq(4) }
+      it { expect(computer_player.spot_to_place_marker(board).to_i).to eq(4) }
     end
 
     context "when human player has occupied tile 4" do
@@ -15,7 +15,7 @@ RSpec.describe Game::ComputerPlayer do
         board.fill_tile_with(4, "O")
       end
 
-      it { expect(subject.spot_to_place_marker(board).to_i).to_not eq(4) }
+      it { expect(computer_player.spot_to_place_marker(board).to_i).to_not eq(4) }
     end
 
     context "when human player is about to win" do
@@ -26,7 +26,7 @@ RSpec.describe Game::ComputerPlayer do
       end
 
       it "should prevent his victory" do
-        expect(subject.spot_to_place_marker(board).to_i).to eq(5)
+        expect(computer_player.spot_to_place_marker(board).to_i).to eq(5)
       end
     end
 
@@ -40,7 +40,7 @@ RSpec.describe Game::ComputerPlayer do
       end
 
       it "should win" do
-        expect(subject.spot_to_place_marker(board).to_i).to eq(8)
+        expect(computer_player.spot_to_place_marker(board).to_i).to eq(8)
       end
     end
   end 
